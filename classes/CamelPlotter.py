@@ -53,7 +53,7 @@ def show_examples(ae, num_example = 3, std_background = 1,
         
     dims = np.random.choice(encodings.shape[1], 4, replace=False)
     
-    fig = plt.figure(3, figsize = (6.4, 4.8))
+    fig = plt.figure(3, figsize = (9, 4.8))
     fig.clf()
     ax1 = fig.add_subplot(1,2,1)
     ax2 = fig.add_subplot(1,2,2)
@@ -77,5 +77,7 @@ def show_examples(ae, num_example = 3, std_background = 1,
     r = np.diff( ax2.get_xlim() )/np.diff(ax2.get_ylim() )
     ax2.set_aspect(r)
     ax2.grid()
+    
+    fig.tight_layout()
     
     if save_fig: fig.savefig(f'plots/example_projs_noise={std_background:.0f}.png')
