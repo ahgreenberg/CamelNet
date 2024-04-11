@@ -10,7 +10,8 @@ import matplotlib.pyplot as plt
 import numpy as np
 import CamelData as cd
 
-def show_examples(ae, num_example = 3, std_background = 1, npt_proj = 128):
+def show_examples(ae, num_example = 3, std_background = 1, 
+                      npt_proj = 128,  save_fig = True):
 
 
     data_test = cd.CamelDataset( *cd.generate_camels(num_camel=num_example, 
@@ -37,9 +38,10 @@ def show_examples(ae, num_example = 3, std_background = 1, npt_proj = 128):
         
         if not i: ax.legend([pl1, pl2, pl3], ["Pure signal, $y(t)$", "Noisy shifted signal, $y'(t)\equiv y(t+\Delta t)+\epsilon(t)$", "$F^{-1}(F(y'(t)))$"], fontsize=9)
         
-    fig.suptitle(f'Example reconstructions, background={std_background:.1f}')    
-    fig.savefig(f'plots/example_recons_noise={std_background:.0f}.png')
+    fig.suptitle(f'Example reconstructions, background={std_background:.1f}')  
     fig.tight_layout()
+
+    if save_fig: fig.savefig(f'plots/example_recons_noise={std_background:.0f}.png')
     
     data_proj = cd.CamelDataset( *cd.generate_camels(num_camel=3,
                                                     locations_per_camel=npt_proj) )
@@ -76,4 +78,4 @@ def show_examples(ae, num_example = 3, std_background = 1, npt_proj = 128):
     ax2.set_aspect(r)
     ax2.grid()
     
-    fig.savefig(f'plots/example_projs_noise={std_background:.0f}.png')
+    if save_fig: fig.savefig(f'plots/example_projs_noise={std_background:.0f}.png')
